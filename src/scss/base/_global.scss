@@ -1,0 +1,32 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: $minWidth + px;
+  font-family: $fontFamily;
+  color: $mainColor;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 600;
+  overflow-x: hidden;
+  background-image: url(../img/global/background.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding-bottom: 172px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 191px;
+  }
+  @media (max-width: 560px) {
+    padding-bottom: 187px;
+  }
+}
+
+.container {
+  max-width: $maxWidthContainer + px;
+  padding: 0 $safePadding + px;
+  margin: 0 auto;
+}

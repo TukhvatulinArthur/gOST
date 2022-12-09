@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('./html/partials/_head.html',{ "title":"gOST fm" })
+  <body>
+    @@include('./html/partials/_header.html')
+    <main class="page">
+      <section class="catalog">
+        <div class="catalog__container container">
+          <ul class="catalog__list"></ul>
+        </div>
+      </section>
+      <section class="player">
+        <div class="container player__container">
+          <div class="player__track-info track-info">
+            <p class="track-info__title">Breath of a Serpent</p>
+            <p class="track-info__artist">LudoWic</p>
+          </div>
+          <div class="player__controller">
+            <button class="player__action player__action_stop"></button>
+            <button class="player__action player__action_prev"></button>
+            <button class="player__action player__action_pause"></button>
+            <button class="player__action player__action_next"></button>
+            <button class="player__action player__action_favourite"></button>
+          </div>
+          <div class="player__progress-wrapper">
+            <div class="player__progress">
+              <input class="player__range" type="range" min="0" max="1000" value="0" />
+            </div>
+            <p class="player__time">
+              <span class="player__time-passed">0:24</span>
+              <span>/</span>
+              <span class="player__time-total">3:24</span>
+            </p>
+          </div>
+          <div class="player__volume-wrapper">
+            <div class="player__volume">
+              <input class="player__volume-range" type="range" min="0" max="100" value="100" />
+            </div>
+            <button class="player__action player__action_mute"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

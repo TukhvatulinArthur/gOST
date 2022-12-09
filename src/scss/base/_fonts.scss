@@ -1,0 +1,14 @@
+@mixin fontMixin($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../resources/fonts/#{$font_name}/#{$file_name}.woff2") format("woff2"),
+      url("../resources/fonts/#{$font_name}/#{$file_name}.woff") format("woff");
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+@include fontMixin("SFUIDisplay", "SFUIDisplay-Light", 300, normal);
+@include fontMixin("SFUIDisplay", "SFUIDisplay-Regular", 400, normal);
+@include fontMixin("SFUIDisplay", "SFUIDisplay-Semibold", 600, normal);

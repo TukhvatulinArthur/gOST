@@ -1,0 +1,8 @@
+$fontFamily: "SFUIDisplay";
+
+$maxWidth: 1920;
+$minWidth: 320;
+$maxWidthContainer: 1210; //+30px добавить для отступов безопасности
+$safePadding: 15;
+$mainColor: #000;
+$containerWidth: $maxWidthContainer + $safePadding; // для миксина adaptiveValue

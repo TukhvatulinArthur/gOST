@@ -1,0 +1,76 @@
+.track {
+  &__img-inner {
+    position: relative;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    line-height: 0;
+
+    &::after {
+      position: absolute;
+      content: "";
+      display: block;
+      background: rgba(255, 255, 255, 0.8);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotateY(90deg);
+      background-image: url(../img/svg/play.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &__img {
+    width: 180px;
+    height: 180px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  &__info {
+    border-radius: 0 0 12px 12px;
+    background-color: #fff;
+    padding: 14px 8px;
+    flex-grow: 1;
+    width: 100%;
+    text-align: left;
+    color: #000;
+    @media (max-width: 560px) {
+      padding: 8px;
+    }
+  }
+
+  &__title {
+  }
+
+  &__artist {
+  }
+}
+
+.track-info {
+  &__title {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    @media (max-width: 560px) {
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+
+  &__artist {
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 300;
+    @media (max-width: 560px) {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+}

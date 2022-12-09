@@ -1,0 +1,127 @@
+.catalog {
+  &__container {
+    max-width: 1226px;
+
+    @media (max-width: 1026px) {
+      padding: 0 14px;
+    }
+
+    @media (max-width: 560px) {
+      padding: 0 11px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 196px);
+    gap: 4px;
+    justify-content: center;
+
+    @media (max-width: 560px) {
+      grid-template-columns: repeat(auto-fill, 148px);
+      gap: 2px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__track {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 6px;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    &:hover,
+    &:focus {
+      .track__img-inner {
+        &::after {
+          opacity: 1;
+          transform: translate(-50%, -50%) rotateY(0);
+        }
+      }
+    }
+    &:active {
+      .track__img-inner {
+        &::after {
+          opacity: 1;
+          transform: translate(-50%, -50%) rotateY(0) scale(1.3);
+        }
+      }
+    }
+    @media (max-width: 560px) {
+      padding: 3px;
+      border-width: 1px;
+      border-radius: 14px;
+    }
+  }
+
+  &__track_active {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+    .track__img-inner {
+      &::after {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(0);
+        background-image: url(../img/svg/pause.svg);
+      }
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.7);
+      .track__img-inner {
+        &::after {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  &__track_pause {
+    .track__img-inner {
+      &::after {
+        background-image: url(../img/svg/play.svg);
+      }
+    }
+  }
+
+  &__show-more-inner {
+    text-align: end;
+    grid-column: 1 / -1;
+    justify-self: end;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    border: 2px solid #fff;
+    margin-right: 7px;
+    @media (max-width: 560px) {
+      margin-top: 8px;
+    }
+  }
+  &__show-more {
+    position: relative;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    letter-spacing: 0.2px;
+    padding: 4px 28px 4px 15px;
+    font-weight: 600;
+    font-size: 18px;
+    &::before {
+      position: absolute;
+      content: url(../img/svg/arrow.svg);
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      line-height: 0;
+    }
+    @media (max-width: 560px) {
+      padding-right: 25px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}

@@ -1,27 +1,3 @@
-// const dataMusic = [
-//   {
-//     id: "1",
-//     artist: "Astral Projection",
-//     track: "Flying Into a Star",
-//     poster: "img/global/rest.jpg",
-//     mp3: "audio/Astral Projection - Flying Into a Star.mp3",
-//   },
-//   {
-//     id: "2",
-//     artist: "Daniel Deluxe",
-//     track: "Air",
-//     poster: "img/global/could.jpg",
-//     mp3: "audio/Daniel Deluxe - Air.mp3",
-//   },
-//   {
-//     id: "3",
-//     artist: "Daniel Deluxe",
-//     track: "Blood and Steel",
-//     poster: "img/global/rust.jpg",
-//     mp3: "audio/Daniel Deluxe - Blood and Steel.mp3",
-//   },
-// ];
-
 const API_URL = "https://narrow-lumpy-gouda.glitch.me/";
 let dataMusic = [];
 let playlist = [];
@@ -29,25 +5,28 @@ let playlist = [];
 const favouriteMusic = localStorage.getItem("favourite") ? JSON.parse(localStorage.getItem("favourite")) : [];
 
 const audio = new Audio();
-
 const tracksCard = document.getElementsByClassName("track");
+
+const player = document.querySelector(".player");
 const pauseBtn = document.querySelector(".player__action_pause");
 const stopBtn = document.querySelector(".player__action_stop");
 const prevBtn = document.querySelector(".player__action_prev");
 const nextBtn = document.querySelector(".player__action_next");
-const trackTitle = document.querySelector(".track-info__title");
-const trackArtist = document.querySelector(".track-info__artist");
-const headerLogo = document.querySelector(".header__logo");
-const favouriteBtn = document.querySelector(".player__action_favourite");
 const muteBtn = document.querySelector(".player__action_mute");
-const player = document.querySelector(".player");
-const catalogList = document.querySelector(".catalog__list");
+const favouriteBtn = document.querySelector(".player__action_favourite");
 const playerRange = document.querySelector(".player__range");
-const volumeRange = document.querySelector(".player__volume-range");
 const playerTimePassed = document.querySelector(".player__time-passed");
 const playerTimeTotal = document.querySelector(".player__time-total");
+const volumeRange = document.querySelector(".player__volume-range");
+
+const trackTitle = document.querySelector(".track-info__title");
+const trackArtist = document.querySelector(".track-info__artist");
+
+const headerLogo = document.querySelector(".header__logo");
 const searchForm = document.querySelector(".header__form");
 const headerFavouriteBtn = document.querySelector(".header__favourite");
+
+const catalogList = document.querySelector(".catalog__list");
 
 function throttle(callee, timeout) {
   let timer = null;
@@ -156,10 +135,10 @@ const renderCard = (item) => {
 
 const renderCatalog = (dataList) => {
   playlist = [...dataList];
-  // if (playlist.length) {
-  //   catalogList.textContent = `Ничего не найдено`;
-  //   return;
-  // }
+  if (playlist.length === 0) {
+    catalogList.textContent = `Ничего не найдено`;
+    return;
+  }
   catalogList.textContent = ``;
   const listCards = dataList.map(renderCard);
   catalogList.append(...listCards);
@@ -218,13 +197,13 @@ const createAddBtn = () => {
 const eventListeners = () => {
   prevBtn.addEventListener("click", playMusic);
   nextBtn.addEventListener("click", playMusic);
+  pauseBtn.addEventListener("click", pausePlayer);
 
   audio.addEventListener("ended", function () {
     nextBtn.dispatchEvent(new Event("click", { bubbles: true }));
   });
 
   const updateTimeThrottle = throttle(updateTime, 700);
-
   audio.addEventListener("timeupdate", updateTimeThrottle);
 
   playerRange.addEventListener("change", function () {
@@ -236,8 +215,6 @@ const eventListeners = () => {
     const data = dataMusic.filter((item) => favouriteMusic.includes(item.id));
     renderCatalog(data);
   });
-
-  pauseBtn.addEventListener("click", pausePlayer);
 
   stopBtn.addEventListener("click", function (e) {
     audio.src = ``;
@@ -288,7 +265,6 @@ const eventListeners = () => {
   searchForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     playlist = await fetch(`${API_URL}api/music?search=${searchForm.search.value}`).then((data) => data.json());
-
     renderCatalog(playlist);
     eventListeners();
   });
@@ -300,24 +276,8 @@ const init = async () => {
 
   dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json());
 
-  // console.log(dataMusic);
-  // , {
-  //   mode: "no-cors",
-  //   method: "GET",
-  // }
   renderCatalog(dataMusic);
   eventListeners();
 };
 
 init();
-
-// window.addEventListener("load", async () => {
-//   if ("serviceWorker" in navigator) {
-//     try {
-//       const reg = await navigator.serviceWorker.register("../sw.js");
-//       console.log("Service worker register success", reg);
-//     } catch (e) {
-//       console.log("Service worker register fail");
-//     }
-//   }
-// });

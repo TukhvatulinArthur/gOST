@@ -50,6 +50,7 @@ const watching = () => {
   watch(path.src.scssFiles, styles);
   watch(path.src.jsFiles, scripts);
   watch(path.src.imgFiles, images);
+  watch(path.src.resourceFiles, resources);
 };
 
 const cleanBuild = () => {

@@ -1,4 +1,4 @@
-const API_URL = "https://narrow-lumpy-gouda.glitch.me/";
+const API_URL = "https://factual-ancient-brisket.glitch.me/";
 let dataMusic = [];
 let playlist = [];
 

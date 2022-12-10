@@ -1,29 +1,29 @@
-const dataMusic = [
-  {
-    id: "1",
-    artist: "Astral Projection",
-    track: "Flying Into a Star",
-    poster: "img/global/rest.jpg",
-    mp3: "audio/Astral Projection - Flying Into a Star.mp3",
-  },
-  {
-    id: "2",
-    artist: "Daniel Deluxe",
-    track: "Air",
-    poster: "img/global/could.jpg",
-    mp3: "audio/Daniel Deluxe - Air.mp3",
-  },
-  {
-    id: "3",
-    artist: "Daniel Deluxe",
-    track: "Blood and Steel",
-    poster: "img/global/rust.jpg",
-    mp3: "audio/Daniel Deluxe - Blood and Steel.mp3",
-  },
-];
+// const dataMusic = [
+//   {
+//     id: "1",
+//     artist: "Astral Projection",
+//     track: "Flying Into a Star",
+//     poster: "img/global/rest.jpg",
+//     mp3: "audio/Astral Projection - Flying Into a Star.mp3",
+//   },
+//   {
+//     id: "2",
+//     artist: "Daniel Deluxe",
+//     track: "Air",
+//     poster: "img/global/could.jpg",
+//     mp3: "audio/Daniel Deluxe - Air.mp3",
+//   },
+//   {
+//     id: "3",
+//     artist: "Daniel Deluxe",
+//     track: "Blood and Steel",
+//     poster: "img/global/rust.jpg",
+//     mp3: "audio/Daniel Deluxe - Blood and Steel.mp3",
+//   },
+// ];
 
-//const API_URL = "https://api-g-2ogqek1wl-tukhvatulinarthur.vercel.app/";
-//let dataMusic = [];
+const API_URL = "https://narrow-lumpy-gouda.glitch.me/";
+let dataMusic = [];
 let playlist = [];
 
 const favouriteMusic = localStorage.getItem("favourite") ? JSON.parse(localStorage.getItem("favourite")) : [];
@@ -99,8 +99,8 @@ const playMusic = (e) => {
     return id === item.id;
   });
 
-  //audio.src = `${API_URL}${track.mp3}`;
-  audio.src = track.mp3;
+  audio.src = `${API_URL}${track.mp3}`;
+  //audio.src = track.mp3;
 
   trackArtist.textContent = track.artist;
   trackTitle.textContent = track.track;
@@ -137,7 +137,7 @@ const renderCard = (item) => {
   li.innerHTML = `
         <a class="catalog__track track" href="#" data-track="${item.id}">
           <div class="track__img-inner">
-            <img class="track__img" src="${item.poster}" alt="${item.artist} ${item.track}" />
+            <img class="track__img" src="${API_URL}${item.poster}" alt="${item.artist} ${item.track}" />
           </div>
           <div class="track__info track-info">
             <p class="track-info__title">${item.track}</p>
@@ -182,7 +182,6 @@ const checkCount = (catalogAddBtn, i = 1) => {
 };
 
 const updateTime = () => {
-  console.log(1);
   const total = audio.duration;
   const currentTime = audio.currentTime;
   const progress = (currentTime / total) * playerRange.max;
@@ -295,11 +294,11 @@ const eventListeners = () => {
   });
 };
 
-const init = () => {
+const init = async () => {
   audio.volume = localStorage.getItem("volume") || 1;
   volumeRange.value = audio.volume * 100;
 
-  // dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json());
+  dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json());
 
   // console.log(dataMusic);
   // , {
